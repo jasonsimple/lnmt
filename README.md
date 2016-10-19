@@ -1,5 +1,6 @@
 # lnmt
 nginx + tomcat + mysql
+
 1.tomcat负载均衡  
 
 2.动静分离  
