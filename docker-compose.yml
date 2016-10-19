@@ -1,0 +1,41 @@
+nginx:
+  image: centos6:nginx_8
+  restart: always
+  volumes:
+    - /root/lnmt/nginx/conf:/usr/local/nginx/conf
+    - /root/lnmt/html/:/var/www/html/
+  ports:
+    - 80:80
+  links:
+    - tomcat1
+    - tomcat2
+
+tomcat1:
+  image: centos6:tomcat_6
+  restart: always 
+  links:
+    - mysql
+  volumes:
+    - /root/lnmt/tomcat1/web/webapp1:/web/webapp1
+    - /root/lnmt/tomcat1/conf:/usr/local/tomcat7/conf
+  expose:
+    - 8080
+
+tomcat2:
+  image: centos6:tomcat_6
+  restart: always
+  links:
+    - mysql
+  volumes:
+    - /root/lnmt/tomcat2/web/webapp1:/web/webapp1
+    - /root/lnmt/tomcat2/conf:/usr/local/tomcat7/conf
+  expose:
+    - 8080
+
+mysql:
+  image: centos6:mysql_5
+  restart: always
+  ports:
+    - 22 
+  expose:
+    - 3306
